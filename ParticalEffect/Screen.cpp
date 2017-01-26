@@ -1,6 +1,6 @@
 #include "Screen.h"
-
 #include <iostream>
+
 
 
 
@@ -34,9 +34,6 @@ bool Screen::init()
 	}
 
 
-
-	
-
 	//init render, texture and buffer
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
 	texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, SCR_W, SCR_H);//255
@@ -57,16 +54,43 @@ bool Screen::init()
 	}
 
 	buffer = new Uint32[SCR_W*SCR_H];
-	memset(buffer, 255, SCR_W*SCR_H*sizeof(Uint32));//set block of memory; init to white
+	memset(buffer, 0, SCR_W*SCR_H*sizeof(Uint32));//set block of memory; init to white
 
-	SDL_UpdateTexture(texture, NULL, buffer, SCR_W*sizeof(Uint32));
-	SDL_RenderClear(renderer);
-	SDL_RenderCopy(renderer, texture, NULL, NULL);
-	SDL_RenderPresent(renderer);
+	
 
 
 	return true;
 }
+
+void Screen::update()
+{
+	SDL_UpdateTexture(texture, NULL, buffer, SCR_W*sizeof(Uint32));
+	SDL_RenderClear(renderer);
+	SDL_RenderCopy(renderer, texture, NULL, NULL);
+	SDL_RenderPresent(renderer);
+}
+
+void Screen::setPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue)
+{
+	Uint32 color = 0;
+
+	color += 0xFF;
+	color <<= 8;
+	color += blue;
+	color <<= 8;
+	color += green;
+	color <<= 8;
+	color += red;
+	
+	
+
+	
+	
+	buffer[(y * SCR_W) + x] = color;//0x00FF00;
+
+}
+
+
 bool Screen::processEvents()
 {
 	SDL_Event event;
