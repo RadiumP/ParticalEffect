@@ -1,14 +1,19 @@
-﻿Build started 1/25/2017 11:21:56 PM.
+﻿Build started 1/30/2017 11:09:41 PM.
      1>Project "E:\ASU\Udemy\Advanced C++\Basic\ParticalEffect\ParticalEffect\ParticalEffect.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"x64\Debug\\" /Fd"x64\Debug\vc140.pdb" /Gd /TP /errorReport:prompt main.cpp
          main.cpp
+     1>e:\asu\udemy\advanced c++\basic\particaleffect\particaleffect\main.cpp(15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>e:\asu\udemy\advanced c++\basic\particaleffect\particaleffect\main.cpp(48): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+     1>e:\asu\udemy\advanced c++\basic\particaleffect\particaleffect\main.cpp(49): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
        Link:
          D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"E:\ASU\Udemy\Advanced C++\Basic\ParticalEffect\x64\Debug\ParticalEffect.exe" /INCREMENTAL /NOLOGO /LIBPATH:"E:\ASU\Udemy\Advanced C++\Basic\ParticalEffect\lib" SDL2.lib SDL2main.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"E:\ASU\Udemy\Advanced C++\Basic\ParticalEffect\x64\Debug\ParticalEffect.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\ASU\Udemy\Advanced C++\Basic\ParticalEffect\x64\Debug\ParticalEffect.lib" /MACHINE:X64 x64\Debug\main.obj
+         x64\Debug\Particles.obj
          x64\Debug\Screen.obj
+         x64\Debug\Swarm.obj
          ParticalEffect.vcxproj -> E:\ASU\Udemy\Advanced C++\Basic\ParticalEffect\x64\Debug\ParticalEffect.exe
      1>Done Building Project "E:\ASU\Udemy\Advanced C++\Basic\ParticalEffect\ParticalEffect\ParticalEffect.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.56
+Time Elapsed 00:00:00.46

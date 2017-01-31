@@ -72,6 +72,12 @@ void Screen::update()
 
 void Screen::setPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue)
 {
+
+	if (x < 0 || x >= SCR_W || y < 0 || y >= SCR_H)
+	{
+		return;
+	}
+
 	Uint32 color = 0;
 
 	color += 0xFF;
