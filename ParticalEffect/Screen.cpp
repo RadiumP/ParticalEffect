@@ -96,6 +96,10 @@ void Screen::setPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue)
 
 }
 
+void Screen::clear()
+{
+	memset(buffer, 0, SCR_W*SCR_H*sizeof(Uint32));//set block of memory; init to white
+}
 
 bool Screen::processEvents()
 {
@@ -120,3 +124,4 @@ void Screen::close()
 	SDL_Quit();
 
 }
+
