@@ -11,6 +11,6 @@ struct Particles
 public:
 	Particles();
 	~Particles();
-	void update();
+	void update(int interval);
 };
 
