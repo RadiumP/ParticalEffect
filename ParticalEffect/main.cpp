@@ -22,12 +22,13 @@ int main(int argc, char ** argv)
 
 	Swarm swarm;
 
+	
 	//game loop
 	while (true)
 	{
 		int elapsed = SDL_GetTicks();
 
-		screen.clear();
+		//screen.clear();
 		swarm.update(elapsed);
 
 		unsigned char red = (unsigned char)((1 + sin(elapsed * 0.0001)) * 128);
@@ -54,6 +55,7 @@ int main(int argc, char ** argv)
 			screen.setPixel(x, y, red, green, blue);
 		}
 
+		screen.boxBlur();
 		screen.update();
 
 		if (!screen.processEvents())
@@ -62,7 +64,7 @@ int main(int argc, char ** argv)
 		}
 	}
 
-
+	screen.close();
 	
 	return 0;
 }

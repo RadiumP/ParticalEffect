@@ -6,7 +6,7 @@
 
 
 Screen::Screen():
-	window(NULL), renderer(NULL),texture(NULL), buffer(NULL)
+	window(NULL), renderer(NULL),texture(NULL), buffer(NULL), buffer2(NULL)
 {
 	
 }
@@ -54,12 +54,63 @@ bool Screen::init()
 	}
 
 	buffer = new Uint32[SCR_W*SCR_H];
+	buffer2 = new Uint32[SCR_W*SCR_H];
 	memset(buffer, 0, SCR_W*SCR_H*sizeof(Uint32));//set block of memory; init to white
-
+	memset(buffer2, 0, SCR_W*SCR_H*sizeof(Uint32));//set block of memory; init to white
 	
 
 
 	return true;
+}
+
+void Screen::boxBlur()
+{
+	//swap buffers, so pixel is in buffer2 and drawing to buffer
+	Uint32 *temp = buffer;
+	buffer = buffer2;
+	buffer2 = temp;
+
+
+
+	for (int y = 0; y < SCR_H; y++)
+	{
+		for (int x = 0; x < SCR_W; x++)
+		{
+
+			int redTotal = 0;
+			int greenTotal = 0;
+			int blueTotal = 0;
+
+			for (int row = -1; row <= 1; row++)
+			{
+				for (int col = -1; col <= 1; col++)
+				{
+					int currentX = x + col;
+					int currentY = y + row;
+
+					if (currentX >= 0 && currentX < SCR_W && currentY >= 0 && currentY < SCR_H)
+					{
+						Uint32 color = buffer2[currentY * SCR_W + currentX];
+						
+						Uint8 red = color;
+						Uint8 green = color >> 8;
+						Uint8 blue = color>>16;
+
+						redTotal += red;
+						greenTotal += green;
+						blueTotal += blue;
+					}
+				}
+			}
+
+			Uint8 red = redTotal / 9;
+			Uint8 green = greenTotal / 9;
+			Uint8 blue = blueTotal / 9;
+
+			setPixel(x,y,red, green, blue);
+
+		}
+	}
 }
 
 void Screen::update()
@@ -88,6 +139,14 @@ void Screen::setPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue)
 	color <<= 8;
 	color += red;
 	
+	//color += red;
+	//color <<= 8;
+	//color += green;
+	//color <<= 8;
+	//color += blue;
+	//color <<= 8;
+	//color += 0xFF;
+
 	
 
 	
@@ -99,6 +158,7 @@ void Screen::setPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue)
 void Screen::clear()
 {
 	memset(buffer, 0, SCR_W*SCR_H*sizeof(Uint32));//set block of memory; init to white
+	memset(buffer2, 0, SCR_W*SCR_H*sizeof(Uint32));//set block of memory; init to white
 }
 
 bool Screen::processEvents()
@@ -118,6 +178,7 @@ void Screen::close()
 {
 	//close
 	delete[] buffer;
+	delete[] buffer2;
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyTexture(texture);
 	SDL_DestroyWindow(window);

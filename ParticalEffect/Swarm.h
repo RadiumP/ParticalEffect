@@ -12,7 +12,7 @@ public:
 	const Particles * const getParticles() { return m_Particles; }//const pointer to a const particle
 	void update(int elapsed);
 
-	const static int NPARTICLES = 500;
+	const static int NPARTICLES = 5000;
 
 };
 
